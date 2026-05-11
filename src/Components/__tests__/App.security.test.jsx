@@ -26,5 +26,9 @@ describe("Home Component Security (XSS Prevention)", () => {
     const homeSection = document.getElementById('home');
     const scripts = homeSection.getElementsByTagName('script');
     expect(scripts.length).toBe(0);
+
+    // Check there are no image elements with dangerous inline event handlers
+    const dangerousImages = homeSection.querySelectorAll('img[onerror]');
+    expect(dangerousImages.length).toBe(0);
   });
 });
