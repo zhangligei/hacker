@@ -25,12 +25,16 @@ describe("Footer Component Security", () => {
     // There should be at least one link to test
     expect(links.length).toBeGreaterThan(0);
 
-    // Check every link to ensure it has target="_blank" and rel="noopener noreferrer"
-    // with the exception of the mailto link which doesn't need it
+    // Check every link to ensure it has target="_blank" and rel includes
+    // both "noopener" and "noreferrer", with the exception of the
+    // mailto link which doesn't need it
     links.forEach(link => {
       if (!link.getAttribute('href').startsWith('mailto:')) {
         expect(link).toHaveAttribute("target", "_blank");
-        expect(link).toHaveAttribute("rel", "noopener noreferrer");
+        const rel = link.getAttribute("rel") || "";
+        const relTokens = rel.split(/\s+/).filter(Boolean);
+        expect(relTokens).toContain("noopener");
+        expect(relTokens).toContain("noreferrer");
       }
     });
   });
