@@ -12,10 +12,13 @@ describe("Portfolio Component Security", () => {
     // There should be at least one link to test
     expect(links.length).toBeGreaterThan(0);
 
-    // Check every link to ensure it has target="_blank" and rel="noopener noreferrer"
+    // Check every link to ensure it has target="_blank" and secure rel tokens
     links.forEach(link => {
       expect(link).toHaveAttribute("target", "_blank");
-      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+      const rel = link.getAttribute("rel") || "";
+      const relTokens = rel.split(/\s+/).filter(Boolean);
+      expect(relTokens).toContain("noopener");
+      expect(relTokens).toContain("noreferrer");
     });
   });
 });
