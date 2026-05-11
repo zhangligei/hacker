@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import Home from "../Home";
 
 describe("Home Component Security (XSS Prevention)", () => {
-  it("should escape malicious payloads and prevent XSS", () => {
+  it("should escape malicious payloads and prevent XSS in the Home component", () => {
     // Malicious payload simulating a Cross-Site Scripting (XSS) attack
     const maliciousPayload = "<script>alert('XSS Attack!')</script>";
     const maliciousTitle = "<img src=x onerror=alert('XSS') />";
